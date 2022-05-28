@@ -1,0 +1,67 @@
+<div class="p-mt-4">
+    <p-panel header="Cadastro" [toggleable]="true">
+      <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit(f)">
+        <div class="p-fluid p-formgrid p-grid p-jc-center">
+          <div class="p-field p-col-12">
+            <label>Pergunta:</label>
+            <input name="pergunta" type="text" pInputText [(ngModel)]="objeto.pergunta" />
+          </div>
+          <div class="p-field p-col-12">
+          <label>Gabarito:</label>
+          <p-checkbox name="gabarito" [(ngModel)]="objeto.gabarito" [binary]="true" inputId="binary"></p-checkbox>
+          <label for="binary">{{objeto.gabarito}}</label>
+          </div>
+          <div class="p-field p-col-3">
+            <button
+              pButton
+              type="submit"
+              class="p-button-raised p-button-rounded"
+              icon="pi pi-fw pi-save"
+              label="Salvar"
+            ></button>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+  </div> 
+  
+  <div class="card">
+    <p-panel header="Listagem" [toggleable]="true">
+      <p-table [value]="objetos">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="pergunta">
+              Pergunta <p-sortIcon field="pergunta"></p-sortIcon>
+            </th>
+            <th pSortableColumn="gabarito">
+              gabarito <p-sortIcon field="gabarito"></p-sortIcon>
+            </th>
+            <th>Opções</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-elemento>
+          <tr>
+            <td>{{ elemento.pergunta }}</td>
+            <td>{{ elemento.gabarito }}</td>
+            <td>
+              <button
+                pButton
+                type="button"
+                title="Editar"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-outlined p-button-info"
+                (click)="editar(elemento)"
+              ></button>
+              <button
+                pButton
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-outlined p-button-danger p-ml-2"
+                (click)="remover(elemento)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+  </div>
+  
